@@ -1,0 +1,16 @@
+{% extends "moodle/base.html" %}
+
+{% block title %}
+{{object_name}} | Listado
+{% endblock %}
+
+{% block content %}
+<h2>Listado {{object_name}}</h2>
+<div class="listado-masterteacher">
+	<ul>
+		{% for curso in object_list %}
+		<li>Nombre: {{curso.nombre}}</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endblock %}

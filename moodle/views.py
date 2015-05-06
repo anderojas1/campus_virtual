@@ -2,8 +2,14 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
+<<<<<<< HEAD
 from .forms import CursoForm, PersonaForm
 from .models import Curso, Persona
+=======
+from django.core.urlresolvers import reverse
+from .forms import CursoForm
+from .models import Curso
+>>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
 
 
 # Create your views here.
@@ -19,6 +25,7 @@ class CursoFormMixin(CursoMixin):
 
 class ListaCursos(CursoMixin, ListView):
     template_name = 'moodle/object_list.html'
+    #context_object_name = 'cursos'
     #context_object_name = 'listado'
 
 class DetallesCurso(CursoMixin, DetailView):
@@ -33,7 +40,7 @@ class EditarCurso(CursoFormMixin, UpdateView):
 class BorrarCurso(CursoMixin, DeleteView):
 	template_name = 'moodle/object_confirm_delete.html'
 	def get_success_url(self):
-		return reverse('listado-cursos')
+		return reverse('listado_cursos')
 
 class VerCurso(CursoMixin, DetailView):
 	"""template_name = 'moodle/detalle_curso.html'

@@ -15,12 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
+<<<<<<< HEAD
 from moodle.views import CrearCurso, VerCurso, CrearPersona, VerPersona
+=======
+from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos, EditarCurso
+>>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
 
 
 cursos_url = patterns ('',
 	url(r'^nuevo-curso$', CrearCurso.as_view(), name = 'add_curso'),
     url(r'^$', VerCurso.as_view(), name = 'ver_curso'),
+    url(r'^delete$', BorrarCurso.as_view(), name = 'borrar_curso'),
+    url(r'^listados$', ListaCursos.as_view(), name = 'listado_cursos'),
+    url(r'^update$', EditarCurso.as_view(), name = 'update_curso'),
+
+
 
 )
 
