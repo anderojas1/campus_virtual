@@ -27,6 +27,9 @@ class Curso(models.Model):
 		self.slug = slugify(self.full_codigo)
 		return super(Curso, self).save(*args, **kwargs)
 
+	def get_nombre(self):
+		return self.nombre
+
 	@models.permalink
 	def get_absolute_url(self):
 		return ('ver_curso', [self.slug])
@@ -51,6 +54,9 @@ class Persona(models.Model):
     fijo = models.CharField(max_length=30, null=True, blank=True, help_text="Ingrese el numero fijo del usuario")
     fecha_nacimiento = models.CharField(max_length=30, help_text="Ingrese la fecha de nacimiento del usuario")
 
+    def __str__(self):
+    	return self.nombre
+
     class Meta:
         ordering = ['fecha_nacimiento']
 
@@ -66,5 +72,30 @@ class Persona(models.Model):
     def get_delete_url(self):
         return ('delete_persona', [self.cedula])
 
+class Cohorte(models.Model):
+	codigo_curso = models.ForeignKey(Curso)
+	slug = models.SlugField(primary_key = True, max_length=30)
+	grupo = models.PositiveSmallIntegerField()
 
+	@property
+	def full_codigo(self):
+		return u"%s %s" % (self.codigo_curso, str(self.grupo))
 
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.full_codigo)
+		return super(Cohorte, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return self.slug
+
+	@models.permalink
+	def get_absolute_url(self):
+		return ('ver_cohorte', [self.slug])
+
+	@models.permalink
+	def get_update_url(self):
+		return ('update_cohorte', [self.slug])
+
+	@models.permalink
+	def get_delete_url(self):
+		return ('borrar_cohorte', [self.slug])

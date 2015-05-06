@@ -15,11 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
-<<<<<<< HEAD
 from moodle.views import CrearCurso, VerCurso, CrearPersona, VerPersona
-=======
-from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos, EditarCurso
->>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
+from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos, EditarCurso, VerCohorte, CrearCohorte
+from moodle.views import BorrarCohorte, EditarCohorte, ListaCohorte
 
 
 cursos_url = patterns ('',
@@ -28,8 +26,6 @@ cursos_url = patterns ('',
     url(r'^delete$', BorrarCurso.as_view(), name = 'borrar_curso'),
     url(r'^listados$', ListaCursos.as_view(), name = 'listado_cursos'),
     url(r'^update$', EditarCurso.as_view(), name = 'update_curso'),
-
-
 
 )
 
@@ -51,6 +47,14 @@ secretaria_url = patterns ('',
 
 )
 
+cohortes_url = patterns ('',
+    url(r'^$', VerCohorte.as_view(), name='ver_cohorte'),
+    url(r'^nueva-cohorte/$', CrearCohorte.as_view(), name='add_cohorte'),
+    url(r'^delete$', BorrarCohorte.as_view(), name = 'borrar_cohorte'),
+    url(r'^listados$', ListaCohorte.as_view(), name = 'listado_cohortes'),
+    url(r'^update$', EditarCohorte.as_view(), name = 'update_cohorte'),
+)
+
 urlpatterns = patterns ('',
     url(r'^admin/', include(admin.site.urls)),
 
@@ -62,6 +66,9 @@ urlpatterns = patterns ('',
 
     url(r'^leader/', include(leaderteacher_url)),
     url(r'^(?P<cedula>[\w-]+)/', include(leaderteacher_url)),
+
+    url(r'^cohorte/$', include(cohortes_url)),
+    url(r'^cohorte/(?P<slug>[\w-]+)/', include(cohortes_url)),
 
 #    url(r'^secretaria/', include(usuario_url)),
 #    url(r'^(?P<cedula>[\w-]+)/', include(usuario_url)),

@@ -2,15 +2,9 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404
-<<<<<<< HEAD
-from .forms import CursoForm, PersonaForm
-from .models import Curso, Persona
-=======
+from .forms import CursoForm, PersonaForm, CohorteForm
+from .models import Curso, Persona, Cohorte
 from django.core.urlresolvers import reverse
-from .forms import CursoForm
-from .models import Curso
->>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
-
 
 # Create your views here.
 class CursoMixin(object):
@@ -91,6 +85,44 @@ class VerPersona(PersonaMixin, DetailView):
 
 	pass
 
+class CohorteMixin(object):
+    model = Cohorte
+    def get_context_data(self, **kwargs):
+        kwargs.update({'object_name':'Cohorte'})
+        return kwargs
+
+class CohorteFormMixin(CohorteMixin):
+    form_class = CohorteForm
+    template_name = 'moodle/object_form.html'
+
+class ListaCohorte(CohorteMixin, ListView):
+    #template_name = 'moodle/object_list.html'
+    #context_object_name = 'listado'
+    pass
+
+class DetallesCohorte(CohorteMixin, DetailView):
+    pass
+
+class CrearCohorte(CohorteFormMixin, CreateView):
+    pass
+
+class EditarCohorte(CohorteFormMixin, UpdateView):
+    pass
+
+class BorrarCohorte(CohorteMixin, DeleteView):
+    template_name = 'moodle/object_confirm_delete.html'
+    def get_success_url(self):
+        return reverse('listado-cohortes')
+
+class VerCohorte(CohorteMixin, DetailView):
+    """template_name = 'moodle/detalle_curso.html'
+    def get_queryset(self):
+        self.codigo = get_object_or_404(Curso, codigo=self.kwargs['slug'])
+        print(self.codigo)
+        return super(VerCurso, self).get_queryset().filter(self.codigo)
+    """
+
+    pass
 
 
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Curso, Persona
+from .models import Curso, Persona, Cohorte
 
 class CursoForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,8 @@ class PersonaForm(forms.ModelForm):
     class Meta:
         model = Persona
         fields = ('cedula', 'nombre', 'apellidos', 'sexo', 'email', 'celular', 'fijo', 'fecha_nacimiento')
+
+class CohorteForm(forms.ModelForm):
+	class Meta:
+		model = Cohorte
+		fields = ('codigo_curso', 'grupo')
