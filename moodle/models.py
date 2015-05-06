@@ -30,11 +30,41 @@ class Curso(models.Model):
 	@models.permalink
 	def get_absolute_url(self):
 		return ('ver_curso', [self.slug])
+
 	@models.permalink
 	def get_update_url(self):
 		return ('update_curso', [self.slug])
+
 	@models.permalink
 	def get_delete_url(self):
 		return ('delete_curso', [self.slug])
+
+
+class Persona(models.Model):
+    lista_sexo = ((0, 'Femenino'), (1, 'Masculino'))
+    cedula = models.SlugField(max_length = 30, primary_key = True, help_text="Ingrese el numero de Cedula del Usuario")
+    nombre = models.CharField(max_length=50, help_text="Ingrese el nombre del Usuario")
+    apellidos = models.CharField(max_length=50, help_text="Ingrese el apellido del Usuario")
+    sexo = models.PositiveSmallIntegerField(choices=lista_sexo, help_text="Escoja el sexo del usuario")
+    email = models.EmailField(max_length=50, help_text="Ingrese el correo electronico del usuario")
+    celular = models.CharField(max_length=30, null=True, blank=True, help_text="Ingrese el numero movil del usuario")
+    fijo = models.CharField(max_length=30, null=True, blank=True, help_text="Ingrese el numero fijo del usuario")
+    fecha_nacimiento = models.CharField(max_length=30, help_text="Ingrese la fecha de nacimiento del usuario")
+
+    class Meta:
+        ordering = ['fecha_nacimiento']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ver_persona', [self.cedula])
+
+    @models.permalink
+    def get_update_url(self):
+        return ('update_persona', [self.cedula])
+
+    @models.permalink
+    def get_delete_url(self):
+        return ('delete_persona', [self.cedula])
+
 
 
