@@ -42,7 +42,7 @@ class Curso(models.Model):
 
 class Persona(models.Model):
     lista_sexo = ((0, 'Femenino'), (1, 'Masculino'))
-    cedula = models.SlugField(max_length = 30, primary_key = True, help_text="Ingrese el numero de Cedula del Usuario")
+    cedula = models.CharField(max_length = 30, primary_key = True, help_text="Ingrese el numero de Cedula del Usuario")
     nombre = models.CharField(max_length=50, help_text="Ingrese el nombre del Usuario")
     apellidos = models.CharField(max_length=50, help_text="Ingrese el apellido del Usuario")
     sexo = models.PositiveSmallIntegerField(choices=lista_sexo, help_text="Escoja el sexo del usuario")
@@ -52,7 +52,7 @@ class Persona(models.Model):
     fecha_nacimiento = models.CharField(max_length=30, help_text="Ingrese la fecha de nacimiento del usuario")
 
     class Meta:
-        ordering = ['fecha_nacimiento']
+        ordering = ['cedula']
 
     @models.permalink
     def get_absolute_url(self):
@@ -63,8 +63,67 @@ class Persona(models.Model):
         return ('update_persona', [self.cedula])
 
     @models.permalink
-    def get_delete_url(self):
+    def  get_delete_url(self):
         return ('delete_persona', [self.cedula])
 
+class MasterTeacher(Persona):
+    experiencia = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ['cedula']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ver_master', [self.cedula])
+
+    @models.permalink
+    def get_update_url(self):
+        return ('update_master', [self.cedula])
+
+    @models.permalink
+    def  get_delete_url(self):
+        return ('delete_master', [self.cedula])
 
 
+class LeaderTeacher(Persona):
+    area_asignada = models.CharField(max_length = 50)
+    calificacion = models.CharField(max_length = 2)
+    certificado = models.CharField(max_length = 50)
+
+    class Meta:
+        ordering = ['cedula']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ver_leader', [self.cedula])
+
+    @models.permalink
+    def get_update_url(self):
+        return ('update_leader', [self.cedula])
+
+    @models.permalink
+    def  get_delete_url(self):
+        return ('delete_leader', [self.cedula])
+
+
+class SecretariaEducacion(models.Model):
+    codigo = models.CharField(primary_key = True, max_length = 30)
+    entidad_territorial = models.CharField(max_length = 50)
+    email = models.EmailField(max_length = 50)
+    fijo = models.CharField(max_length = 30, null = True, blank = True)
+    direccion = models.CharField(max_length = 30)
+
+    class Meta:
+        ordering = ['codigo']
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ver_secretaria', [self.codigo])
+
+    @models.permalink
+    def get_update_url(self):
+        return ('update_secretaria', [self.codigo])
+
+    @models.permalink
+    def get_delete_url(self):
+        return ('delete_secretaria', [self.codigo])

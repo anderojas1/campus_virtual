@@ -15,39 +15,47 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
-<<<<<<< HEAD
-from moodle.views import CrearCurso, VerCurso, CrearPersona, VerPersona
-=======
+#<<<<<<< HEAD
+from moodle.views import CrearMasterTeacher, VerMasterTeacher, BorrarMasterTeacher, ListaMasterTeacher, EditarMasterTeacher
+from moodle.views import CrearLeaderTeacher, VerLeaderTeacher, BorrarLeaderTeacher, ListaLeaderTeacher, EditarLeaderTeacher
+from moodle.views import CrearSecretariaEducacion, VerSecretariaEducacion, BorrarSecretariaEducacion, ListaSecretariaEducacion, EditarSecretariaEducacion
 from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos, EditarCurso
->>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
+#>>>>>>> 543b6a7aed5fc02b6108860b03c313f09cbd59ef
 
 
 cursos_url = patterns ('',
 	url(r'^nuevo-curso$', CrearCurso.as_view(), name = 'add_curso'),
     url(r'^$', VerCurso.as_view(), name = 'ver_curso'),
-    url(r'^delete$', BorrarCurso.as_view(), name = 'borrar_curso'),
-    url(r'^listados$', ListaCursos.as_view(), name = 'listado_cursos'),
-    url(r'^update$', EditarCurso.as_view(), name = 'update_curso'),
-
-
+    url(r'^delete-curso$', BorrarCurso.as_view(), name = 'borrar_curso'),
+    url(r'^listados-curso$', ListaCursos.as_view(), name = 'listado_cursos'),
+    url(r'^update-curso$', EditarCurso.as_view(), name = 'update_curso'),
 
 )
 
 masterteacher_url =  patterns ('',
-	url(r'^nueva-persona$', CrearPersona.as_view(), name = 'add_masterTeacher'),
-    url(r'^$', VerPersona.as_view(), name = 'ver_masterTeacher'),
+	url(r'^nuevo-master$', CrearMasterTeacher.as_view(), name = 'add_masterTeacher'),
+    url(r'^$', VerMasterTeacher.as_view(), name = 'ver_masterTeacher'),
+    url(r'^delete-master$', BorrarMasterTeacher.as_view(), name = 'borrar_masterTeacher'),
+    url(r'^listados-master$', ListaMasterTeacher.as_view(), name = 'listado_masterTeacher'),
+    url(r'^update-master$', EditarMasterTeacher.as_view(), name = 'update_masterTeacher'),
 
 )
 
 leaderteacher_url =  patterns ('',
-	url(r'^nueva-persona$', CrearPersona.as_view(), name = 'add_leaderTeacher'),
-    url(r'^$', VerPersona.as_view(), name = 'ver_leaderTeacher'),
+	url(r'^nuevo-leader$', CrearLeaderTeacher.as_view(), name = 'add_leaderTeacher'),
+    url(r'^$', VerLeaderTeacher.as_view(), name = 'ver_leaderTeacher'),
+    url(r'^delete-leader$', BorrarLeaderTeacher.as_view(), name = 'borrar_leaderTeacher'),
+    url(r'^listados-leader$', ListaLeaderTeacher.as_view(), name = 'listado_leaderTeacher'),
+    url(r'^update-leader$', EditarLeaderTeacher.as_view(), name = 'update_leaderTeacher'),
 
 )
 
 secretaria_url = patterns ('',
-	url(r'^nueva-persona$', CrearPersona.as_view(), name = 'add_secretaria'),
-    url(r'^$', VerPersona.as_view(), name = 'ver_secretaria'),
+	url(r'^nueva-secretaria$', CrearSecretariaEducacion.as_view(), name = 'add_secretaria'),
+    url(r'^$', VerSecretariaEducacion.as_view(), name = 'ver_secretaria'),
+    url(r'^delete-secretaria$', BorrarSecretariaEducacion.as_view(), name = 'borrar_secretaria'),
+    url(r'^listados-secretaria$', ListaSecretariaEducacion.as_view(), name = 'listado_secretaria'),
+    url(r'^update-secretaria$', EditarSecretariaEducacion.as_view(), name = 'update_secretaria'),
 
 )
 
@@ -63,8 +71,8 @@ urlpatterns = patterns ('',
     url(r'^leader/', include(leaderteacher_url)),
     url(r'^(?P<cedula>[\w-]+)/', include(leaderteacher_url)),
 
-#    url(r'^secretaria/', include(usuario_url)),
-#    url(r'^(?P<cedula>[\w-]+)/', include(usuario_url)),
+    url(r'^secretaria/', include(secretaria_url)),
+    url(r'^(?P<codigo>[\w-]+)/', include(secretaria_url)),
 
 )
 
