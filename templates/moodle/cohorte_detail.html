@@ -1,0 +1,12 @@
+{% extends 'moodle/base.html' %}
+
+{% block title %}Información {{object}}{% endblock %}
+
+{% block content %}
+<table>
+<tr><th>Código:</th><td>{{object.slug}}</td></tr>
+<tr><th>Area:</th><td><a href="{{object.cohorte.get_absolute_url}}">{{object.area}}</a></td></tr>
+<tr><th>Código:</th><td>{{object.slug}}</td></tr>
+</table>
+<a href="{{object.get_update_url}}">Update</a> | <a href="{{object.get_delete_url}}">Eliminar</a>-->
+{% endblock %}
