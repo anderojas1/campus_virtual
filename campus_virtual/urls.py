@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
-from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos
+from moodle.views import CrearCurso, VerCurso, BorrarCurso, ListaCursos, EditarCurso
 
 
 cursos_url = patterns ('',
@@ -23,6 +23,8 @@ cursos_url = patterns ('',
     url(r'^$', VerCurso.as_view(), name = 'ver_curso'),
     url(r'^delete$', BorrarCurso.as_view(), name = 'borrar_curso'),
     url(r'^listados$', ListaCursos.as_view(), name = 'listado_cursos'),
+    url(r'^update$', EditarCurso.as_view(), name = 'update_curso'),
+
 
 
 )
