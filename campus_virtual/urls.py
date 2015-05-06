@@ -59,16 +59,16 @@ urlpatterns = patterns ('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^curso/', include(cursos_url)),
-    url(r'^(?P<slug>[\w-]+)/', include(cursos_url)),
+    #url(r'^(?P<slug>[\w-]+)/', include(cursos_url)),
 
     url(r'^master/', include(masterteacher_url)),
-    url(r'^(?P<cedula>[\w-]+)/', include(masterteacher_url)),
+    #url(r'^(?P<cedula>[\w-]+)/', include(masterteacher_url)),
 
     url(r'^leader/', include(leaderteacher_url)),
-    url(r'^(?P<cedula>[\w-]+)/', include(leaderteacher_url)),
+    #url(r'^(?P<cedula>[\w-]+)/', include(leaderteacher_url)),
 
     url(r'^cohorte/$', include(cohortes_url)),
-    url(r'^cohorte/(?P<slug>[\w-]+)/', include(cohortes_url)),
+    url(r'^(?P<slug>[\w-]+)/', include(cohortes_url)),
 
 #    url(r'^secretaria/', include(usuario_url)),
 #    url(r'^(?P<cedula>[\w-]+)/', include(usuario_url)),
