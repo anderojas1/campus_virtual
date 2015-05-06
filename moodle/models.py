@@ -35,6 +35,6 @@ class Curso(models.Model):
 		return ('update_curso', [self.slug])
 	@models.permalink
 	def get_delete_url(self):
-		return ('delete_curso', [self.slug])
+		return ('borrar_curso', [self.slug])
 
 
